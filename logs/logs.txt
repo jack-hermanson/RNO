@@ -1,0 +1,40 @@
+DEBUG    [2024-09-15 21:49:33]: LOGGING IS RUNNING - __init__.py:69 
+INFO     [2024-09-15 21:49:33]: Running app in environment 'None' - __init__.py:70 
+INFO     [2024-09-15 21:49:33]: FLASK_ENV: 'development' - __init__.py:71 
+DEBUG    [2024-09-15 21:49:33]: LOGGING IS RUNNING - __init__.py:69 
+INFO     [2024-09-15 21:49:33]: Running app in environment 'None' - __init__.py:70 
+INFO     [2024-09-15 21:49:33]: FLASK_ENV: 'development' - __init__.py:71 
+DEBUG    [2024-09-15 21:49:37]: LOGGING IS RUNNING - __init__.py:69 
+INFO     [2024-09-15 21:49:37]: Running app in environment 'None' - __init__.py:70 
+INFO     [2024-09-15 21:49:37]: FLASK_ENV: 'development' - __init__.py:71 
+DEBUG    [2024-09-15 21:58:37]: LOGGING IS RUNNING - __init__.py:69 
+INFO     [2024-09-15 21:58:37]: Running app in environment 'None' - __init__.py:70 
+INFO     [2024-09-15 21:58:37]: FLASK_ENV: 'development' - __init__.py:71 
+DEBUG    [2024-09-15 22:03:22]: LOGGING IS RUNNING - __init__.py:69 
+INFO     [2024-09-15 22:03:22]: Running app in environment 'None' - __init__.py:70 
+INFO     [2024-09-15 22:03:22]: FLASK_ENV: 'development' - __init__.py:71 
+DEBUG    [2024-09-15 22:07:12]: LOGGING IS RUNNING - __init__.py:69 
+INFO     [2024-09-15 22:07:12]: Running app in environment 'None' - __init__.py:70 
+INFO     [2024-09-15 22:07:12]: FLASK_ENV: 'development' - __init__.py:71 
+DEBUG    [2024-09-15 22:10:46]: LOGGING IS RUNNING - __init__.py:69 
+INFO     [2024-09-15 22:10:46]: Running app in environment 'None' - __init__.py:70 
+INFO     [2024-09-15 22:10:46]: FLASK_ENV: 'development' - __init__.py:71 
+DEBUG    [2024-09-15 22:10:46]: LOGGING IS RUNNING - __init__.py:69 
+INFO     [2024-09-15 22:10:46]: Running app in environment 'None' - __init__.py:70 
+INFO     [2024-09-15 22:10:46]: FLASK_ENV: 'development' - __init__.py:71 
+DEBUG    [2024-09-15 22:12:48]: LOGGING IS RUNNING - __init__.py:69 
+INFO     [2024-09-15 22:12:48]: Running app in environment 'None' - __init__.py:70 
+INFO     [2024-09-15 22:12:48]: FLASK_ENV: 'development' - __init__.py:71 
+DEBUG    [2024-09-15 22:18:51]: LOGGING IS RUNNING - __init__.py:71 
+INFO     [2024-09-15 22:18:51]: Running app in environment 'None' - __init__.py:72 
+INFO     [2024-09-15 22:18:51]: FLASK_ENV: 'development' - __init__.py:73 
+INFO     [2024-09-15 22:27:14]: Running app in environment 'None' - __init__.py:72 
+INFO     [2024-09-15 22:27:14]: FLASK_ENV: 'None' - __init__.py:73 
+INFO     [2024-09-15 22:27:35]: Running app in environment 'None' - __init__.py:72 
+INFO     [2024-09-15 22:27:35]: FLASK_ENV: 'None' - __init__.py:73 
+DEBUG    [2024-09-15 22:33:24]: LOGGING IS RUNNING - __init__.py:71 
+INFO     [2024-09-15 22:33:24]: Running app in environment 'dev' - __init__.py:72 
+INFO     [2024-09-15 22:33:24]: FLASK_ENV: 'development' - __init__.py:73 
+DEBUG    [2024-09-15 22:35:56]: LOGGING IS RUNNING - __init__.py:71 
+INFO     [2024-09-15 22:35:56]: Running app in environment 'dev' - __init__.py:72 
+INFO     [2024-09-15 22:35:56]: FLASK_ENV: 'development' - __init__.py:73 
