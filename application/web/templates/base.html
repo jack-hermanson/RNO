@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" x-data="themeSwitcher()" :data-bs-theme="currentTheme">
+<head>
+    <meta charset="UTF-8">
+
+    <title>RNO Manager | {{ title }}</title>
+    <meta name="og:title" content="RNO Manager | {{ title }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/jack-hermanson-css-lib/css/main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <meta name="og:url" content="{{ request.url }}">
+    {# todo og:image #}
+    {#    <meta name="og:image" content="{{ url_for('static', filename='', _external=True) }}">#}
+    {# todo - og:description #}
+    {#    <meta name="og:description"#}
+    {#          content="This simple application is used to help us keep track of shifts at the Morey Chicken Cooperative">#}
+    <script src="{{ url_for("static", filename="node_modules/htmx.org/dist/htmx.min.js") }}"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <div class="container">
+        <a href="{{ url_for('main.index') }}" class="navbar-brand d-flex">
+            {#        todo logo #}
+            {#            <img alt="logo" src="{{ url_for("static", filename="logo-transparent.png") }}" height="42"#}
+            {#                 class="d-inline-block align-text-top logo me-2">#}
+            <span class="d-inline-flex align-items-center my-auto pt-1">
+                <span>
+                    RNO Manager
+{#                    todo custom name #}
+                </span>
+                {% if environment != "production" %}<span class="d-flex my-auto pt-1"
+                                                          style="font-family: monospace; color: #fff; text-shadow: #222 0px 0px 5px, #ffaaff 0px 0px 10px, #ffaaff 0px 0px 15px; margin-left: 5px; font-size: 12px;">{{ ' {' }}{{ environment }}{{ '}' }}</span>{% endif %}
+            </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto my-auto pt-1 w-100">
+                <li class="nav-item">
+                    <a href="{{ url_for('main.index') }}"
+                       class="nav-link {% if active_route == 'main' %}active{% endif %}">Home</a>
+                </li>
+                {#                <li class="nav-item">#}
+                {#                    <a href="{{ url_for('shifts.recurring_shift_signup') }}"#}
+                {#                       class="nav-link {% if active_route == 'shifts' %}active{% endif %}">Shift Signup</a>#}
+                {#                </li>#}
+                {#                {% if current_user.is_authenticated and current_user.clearance >= 2 %}#}
+                {#                    <li class="nav-item">#}
+                {#                        <a href="{{ url_for('admin.index') }}"#}
+                {#                           class="nav-link {% if active_route == 'admin' %}active{% endif %}">Admin</a>#}
+                {#                    </li>#}
+                {#                {% endif %}#}
+                {#                <li class="nav-item ms-lg-auto">#}
+                {#                    {% if current_user.is_authenticated %}#}
+                {#                        <a href="#" class="nav-link {% if active_route == 'accounts' %}active{% endif %}">{{ current_user.name }}</a>#}
+                {#                        <a href="{{ url_for('accounts.me') }}"#}
+                {#                           class="nav-link {% if active_route == 'accounts' %}active{% endif %}">{{ current_user.name }}</a>#}
+                {#                    {% else %}#}
+                {# hiding this for now #}
+                {#                        <a href="{{ url_for('accounts.login') }}" class="nav-link">Log In</a>#}
+                {#                    {% endif %}#}
+                {#                </li>#}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        <div class="container mt-3">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="mb-0">{{ message }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<div class="container pb-3 flex-grow-1">
+    {% if not hide_title_row %}
+        <div class="row">
+            <div class="col-12 mb-2">
+                <div class="page-title {% if title_row_no_border %}no-border-bottom{% endif %}">
+                    <h2 class="my-0">
+                        {% if title %}
+                            {{ text_title if text_title else title }}
+                        {% endif %}
+                    </h2>
+                    <div class="actions">
+                        {% block actions %}
+                        {% endblock actions %}
+                    </div>
+                </div>
+                {#            <hr class="mt-1" />#}
+            </div>
+        </div>
+    {% endif %}
+    {% block body %}
+    {% endblock body %}
+</div>
+
+{% block modals %}{% endblock modals %}
+
+<script src="{{ url_for("static", filename="node_modules/bootstrap/dist/js/bootstrap.bundle.js") }}"></script>
+
+{% block scripts %}{% endblock scripts %}
+<footer class="bg-dark-subtle py-3">
+    <div class="container">
+        <div class="btn-group">
+
+            <button class="btn btn-sm btn-outline-primary"
+                    @click="setTheme('light')"
+                    :aria-pressed="currentTheme === 'light'"
+                    :class="{'active': currentTheme === 'light'}"
+                    data-bs-theme-value="light">
+                Light
+            </button>
+
+            <button class="btn btn-sm btn-outline-primary"
+                    @click="setTheme('dark')"
+                    :aria-pressed="currentTheme === 'dark'"
+                    :class="{'active': currentTheme === 'dark'}"
+                    data-bs-theme-value="dark">
+                Dark
+            </button>
+        </div>
+
+    </div>
+</footer>
+</body>
+<script>
+    function themeSwitcher() {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        return {
+            themes: ['light', 'dark'],
+            currentTheme: localStorage.getItem('theme') || (prefersDark.matches ? 'dark' : 'light'),
+
+            setTheme(newTheme) {
+                this.currentTheme = newTheme;
+                localStorage.setItem('theme', newTheme);
+                document.documentElement.setAttribute('data-bs-theme', newTheme);
+            }
+        };
+    }
+
+    // Initialize the theme on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeSwitcherInstance = themeSwitcher();
+        themeSwitcherInstance.setTheme(themeSwitcherInstance.currentTheme); // Apply initial theme
+
+        // Update theme when system preference changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                themeSwitcherInstance.setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    });
+</script>
+<script src="{{ url_for('static', filename='node_modules/alpinejs/dist/cdn.js') }}"></script>
+
+</html>
