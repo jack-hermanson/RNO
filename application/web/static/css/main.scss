@@ -1,4 +1,3 @@
-
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -17,3 +16,48 @@ $container-max-widths: (
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../node_modules/jack-hermanson-css-lib/src/main";
+
+.main-container {
+
+}
+
+
+span.fake-link {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  user-select: none;
+  &:hover, &:active {
+    text-decoration-style: solid;
+  }
+}
+
+//.card {
+//  background-color: $dark;
+//}
+
+.form-group {
+  margin-bottom: 1em;
+}
+
+.page-title {
+  display: flex;
+  width: 100%;
+
+  &:not(.no-border-bottom) {
+    @extend .border-bottom;
+  }
+
+  h2 {
+    margin-bottom: 0;
+    margin-top: 0.5em;
+    display: block;
+  }
+
+  .actions {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 0.5em;
+  }
+}

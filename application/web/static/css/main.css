@@ -7393,7 +7393,7 @@ textarea.form-control-lg {
   border-right: 0 !important;
 }
 
-.border-bottom {
+.border-bottom, .page-title:not(.no-border-bottom) {
   border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
 }
 
@@ -11902,6 +11902,36 @@ table.same-width tbody > tr th {
 
 .dropdown-menu {
   z-index: 1050 !important;
+}
+
+span.fake-link {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+span.fake-link:hover, span.fake-link:active {
+  text-decoration-style: solid;
+}
+
+.form-group {
+  margin-bottom: 1em;
+}
+
+.page-title {
+  display: flex;
+  width: 100%;
+}
+.page-title h2, .page-title .h2 {
+  margin-bottom: 0;
+  margin-top: 0.5em;
+  display: block;
+}
+.page-title .actions {
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: 0.5em;
 }
 
 /*# sourceMappingURL=main.css.map */

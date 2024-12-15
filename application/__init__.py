@@ -24,12 +24,7 @@ login_manager.login_message_category = "warning"
 
 def create_app(config_class=Config):
     # set up file paths for static resources
-    app = Flask(
-        __name__,
-        static_url_path="/static",
-        static_folder="web/static",
-        template_folder="web/templates"
-    )
+    app = Flask(__name__, static_url_path="/static", static_folder="web/static", template_folder="web/templates")
 
     # set up environment variables
     app.config.from_object(config_class)
@@ -47,6 +42,7 @@ def create_app(config_class=Config):
     # todo routes and blueprints
     from application.modules.main.routes import main
     from application.modules.accounts.routes import accounts
+
     for blueprint in [main, accounts]:
         app.register_blueprint(blueprint)
 
@@ -57,9 +53,9 @@ def create_app(config_class=Config):
     @app.template_filter()
     def number_suffix(value):
         if 10 <= value % 100 <= 20:
-            suffix = 'th'
+            suffix = "th"
         else:
-            suffix = {1: 'st', 2: 'nd', 3: 'rd'}.get(value % 10, 'th')
+            suffix = {1: "st", 2: "nd", 3: "rd"}.get(value % 10, "th")
         return f"{value}{suffix}"
 
     @app.context_processor
@@ -92,5 +88,8 @@ fh.namer = lambda name: name.replace(".txt", "") + ".txt"
 
 logger.addHandler(fh)
 logger.addHandler(sh)
-logger.setLevel(logging.DEBUG if (
-    os.environ.get("FLASK_ENV") == "dev" or os.environ.get("FLASK_ENV") == "development") else logging.INFO)
+logger.setLevel(
+    logging.DEBUG
+    if (os.environ.get("FLASK_ENV") == "dev" or os.environ.get("FLASK_ENV") == "development")
+    else logging.INFO
+)

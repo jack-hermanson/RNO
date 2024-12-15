@@ -9,14 +9,16 @@ class StreamLogFormatter(logging.Formatter):
     bold_red = "\x1b[31;1m"
     reset = "\x1b[0m"
     # format = f"%(levelname)-8s [%(asctime)s]: %(message)s  {reset}{grey}%(filename)s:%(lineno)d %(name)s"
-    format_string = f"%(levelname)-8s {reset}{grey}%(filename)s:%(lineno)d{reset} [%(asctime)s]: %(message)s{reset}{grey}"
+    format_string = (
+        f"%(levelname)-8s {reset}{grey}%(filename)s:%(lineno)d{reset} [%(asctime)s]: %(message)s{reset}{grey}"
+    )
 
     FORMATS = {
         logging.DEBUG: grey + format_string + reset,
         logging.INFO: cyan + format_string + reset,
         logging.WARNING: yellow + format_string + reset,
         logging.ERROR: red + format_string + reset,
-        logging.CRITICAL: bold_red + format_string + reset
+        logging.CRITICAL: bold_red + format_string + reset,
     }
 
     def format(self, record):
@@ -34,7 +36,7 @@ class FileLogFormatter(logging.Formatter):
         logging.INFO: format_string,
         logging.WARNING: format_string,
         logging.ERROR: format_string,
-        logging.CRITICAL: format_string
+        logging.CRITICAL: format_string,
     }
 
     def format(self, record):

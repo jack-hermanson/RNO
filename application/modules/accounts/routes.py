@@ -21,8 +21,7 @@ def login():
         next_page = request.args.get("next")
         return redirect(next_page) if next_page else redirect(url_for("main.index"))
 
-    return render_template("accounts/login.html",
-                           form=form)
+    return render_template("accounts/login.html", form=form)
 
 
 @accounts.route("/logout")
@@ -31,7 +30,7 @@ def logout():
         flash("You are not logged in, so you cannot log out!", "danger")
         return redirect(url_for("accounts.login"))
 
-    name = current_user.name
+    name = current_user.username
     logout_user()
     flash(f"Goodbye, {name}.", "info")
     return redirect(url_for("main.index"))
@@ -42,10 +41,9 @@ def register():
     form = CreateAccountForm()
     if form.validate_on_submit():
         created_account = services.register(form)
-        flash(f"Account \"{created_account.name}\" registered successfully.", "success")
+        flash(f'Account "{created_account.username}" registered successfully. Please log in.', "success")
         return redirect(url_for("accounts.login"))
-    return render_template("accounts/register.html",
-                           form=form)
+    return render_template("accounts/register.html", form=form)
 
 
 @login_required
@@ -53,8 +51,7 @@ def register():
 def me():
     form = EditAccountForm()
 
-    return render_template("accounts/edit.html",
-                           form=form)
+    return render_template("accounts/edit.html", form=form)
 
 
 @login_required
@@ -63,9 +60,8 @@ def change_password():
     form = EditAccountForm()
     if form.validate_on_submit():
         account = Account.query.get_or_404(current_user.account_id)
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
         account.password = hashed_password
         db.session.commit()
         flash("Password changed successfully.", "success")
-    return render_template("accounts/edit.html",
-                           form=form)
+    return render_template("accounts/edit.html", form=form)
