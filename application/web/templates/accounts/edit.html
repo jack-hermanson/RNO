@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% from "macros/form.html" import form_group %}
+
+{% set title = "Edit Account" %}
+{% set active_route = "accounts" %}
+
+
+{% block body %}
+    <p>{{ current_user.first_name }}</p>
+{% endblock body %}

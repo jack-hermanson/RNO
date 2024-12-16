@@ -79,7 +79,7 @@
             <ul class="navbar-nav ms-auto my-auto pt-1 w-100 justify-content-end">
                 <li class="nav-item">
                     {% if current_user.is_authenticated %}
-                        <a href="#"
+                        <a href="{{ url_for('accounts.me') }}"
                            class="nav-link {% if active_route == 'accounts' %}active{% endif %}"
                         >
                             {{ current_user.username }}
@@ -126,6 +126,7 @@
                     </h2>
                     <div class="actions">
                         {% block actions %}
+
                         {% endblock actions %}
                     </div>
                 </div>

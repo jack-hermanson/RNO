@@ -6,7 +6,7 @@ from application.modules.accounts.forms import LoginForm, CreateAccountForm, Edi
 from application.modules.accounts.models import Account
 from . import services
 
-accounts = Blueprint("accounts", __name__, url_prefix="/accounts")
+accounts = Blueprint("accounts", __name__, url_prefix="/auth")
 
 
 @login_manager.user_loader
@@ -46,16 +46,22 @@ def register():
     return render_template("accounts/register.html", form=form)
 
 
+@accounts.route("/edit")
 @login_required
-@accounts.route("/me")
-def me():
+def edit():
     form = EditAccountForm()
 
     return render_template("accounts/edit.html", form=form)
 
 
+@accounts.route("/me")
 @login_required
+def me():
+    return render_template("accounts/me.html", title=f"{current_user.first_name} {current_user.last_name}")
+
+
 @accounts.route("/change-password", methods=["POST"])
+@login_required
 def change_password():
     form = EditAccountForm()
     if form.validate_on_submit():

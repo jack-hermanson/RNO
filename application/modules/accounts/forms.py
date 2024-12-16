@@ -17,6 +17,7 @@ class CreateOrEditFormBase(FlaskForm):
 
     first_name = StringField(
         "First Name",
+        filters=[lambda x: x.strip() if x else x],
         validators=[DataRequired(), first_name_length],
         render_kw={
             "autofocus": "true",
@@ -26,11 +27,13 @@ class CreateOrEditFormBase(FlaskForm):
     )
     last_name = StringField(
         "Last Name",
+        filters=[lambda x: x.strip() if x else x],
         validators=[DataRequired(), last_name_length],
         render_kw={"spellcheck": "false", "autocorrect": "off"},
     )
     email = StringField(
         "Email",
+        filters=[lambda x: x.strip() if x else x],
         validators=[Email()],
         render_kw={
             "spellcheck": "false",
@@ -41,6 +44,7 @@ class CreateOrEditFormBase(FlaskForm):
     )
     username = StringField(
         "Username",
+        filters=[lambda x: x.strip() if x else x],
         validators=[DataRequired(), username_length],
         description="A unique username to you that you can remember. This is not displayed to others.",
         render_kw={
@@ -55,6 +59,7 @@ class CreateOrEditFormBase(FlaskForm):
 class LoginForm(FlaskForm):
     username = StringField(
         "Username",
+        filters=[lambda x: x.strip() if x else x],
         validators=[DataRequired(), username_length],
         description="Your unique username.",
         render_kw={
