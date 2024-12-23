@@ -46,10 +46,14 @@ def register():
     return render_template("accounts/register.html", form=form)
 
 
-@accounts.route("/edit")
+@accounts.route("/edit", methods=["GET", "POST"])
 @login_required
 def edit():
     form = EditAccountForm()
+    if form.validate_on_submit() and services.edit_my_account(form):
+        return redirect(url_for("accounts.edit"))
+    elif request.method == "GET":
+        form = services.get_edit_form()
 
     return render_template("accounts/edit.html", form=form)
 

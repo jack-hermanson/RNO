@@ -1,5 +1,6 @@
+from flask_login import current_user
 from flask_wtf import FlaskForm
-from sqlalchemy import func
+from sqlalchemy import func, and_
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Email
 
@@ -108,12 +109,29 @@ class CreateAccountForm(CreateOrEditFormBase):
 
 # if we allowed editing name, then CreateOrEditFormBase will be used, until then don't inherit
 # class EditAccountForm(CreateOrEditFormBase):
-class EditAccountForm(FlaskForm):
+class EditAccountForm(CreateOrEditFormBase):
     password = PasswordField("Password", validators=[password_length])
     confirm_password = PasswordField("Confirm Password", validators=[EqualTo("password", "Your passwords must match.")])
     submit = SubmitField("Save Changes")
 
     @staticmethod
-    def validate_password(_, password):
-        if len(password.data) > password_length.max:
-            raise ValidationError(f"Name must be fewer than {password_length.max} characters")
+    def validate_username(_, username):
+        stripped_username = username.data.strip()
+        if Account.query.filter(
+            and_(
+                func.lower(Account.username) == func.lower(stripped_username),  # Has same username, and...
+                Account.account_id != current_user.account_id,  # has same account id.
+            )
+        ).all():
+            raise ValidationError("That username has already been taken.")
+
+    @staticmethod
+    def validate_email(_, email):
+        stripped_email = email.data.strip()
+        if Account.query.filter(
+            and_(
+                func.lower(Account.email) == func.lower(stripped_email),  # Has same email, and...
+                Account.account_id != current_user.account_id,  # has same account id.
+            )
+        ).all():
+            raise ValidationError("That email has already been used.")

@@ -6,6 +6,7 @@ $grid-breakpoints: (
   xl: 1400px,
   xxl: 1600px
 );
+
 $container-max-widths: (
   sm: 540px,
   md: 1000px,
@@ -16,6 +17,7 @@ $container-max-widths: (
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../node_modules/jack-hermanson-css-lib/src/main";
+@import "./callout";
 
 .main-container {
 
@@ -61,3 +63,4 @@ span.fake-link {
     margin-bottom: 0.5em;
   }
 }
+
