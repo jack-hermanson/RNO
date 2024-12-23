@@ -1,8 +1,10 @@
 from functools import wraps
+from http import HTTPStatus
 
-from flask import abort
+from flask import abort, request
 from flask_login import current_user
 
+from application import logger
 from application.modules.accounts.ClearanceEnum import ClearanceEnum
 
 
@@ -11,7 +13,8 @@ def requires_clearance(minimum_clearance: ClearanceEnum):
         @wraps(func)
         def wrapped(*args, **kwargs):
             if not current_user.clearance >= minimum_clearance:
-                return abort(403)
+                logger.warn(f"<{current_user.username}, {current_user.account_id}> tried to access {request.path}")
+                return abort(HTTPStatus.FORBIDDEN)
             return func(*args, **kwargs)
 
         return wrapped

@@ -1,6 +1,6 @@
 from functools import wraps
 
-from flask import Blueprint, abort
+from flask import Blueprint, abort, render_template
 from flask_login import login_required, current_user
 
 from application.modules.accounts.ClearanceEnum import ClearanceEnum
@@ -13,4 +13,4 @@ admin = Blueprint("admin", __name__, url_prefix="/admin")
 @login_required
 @requires_clearance(ClearanceEnum.ADMIN)
 def dashboard():
-    return "admin dashboard"
+    return render_template("admin/dashboard.html")
