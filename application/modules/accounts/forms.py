@@ -100,6 +100,10 @@ class CreateAccountForm(CreateOrEditFormBase):
         if Account.query.filter(func.lower(Account.username) == func.lower(stripped_username)).all():
             raise ValidationError("That username has already been taken.")
 
+        # Forbidden usernames.
+        if stripped_username.lower() in ["anon", "admin"]:
+            raise ValidationError("That username is not allowed.")
+
     @staticmethod
     def validate_email(_, email):
         stripped_email = email.data.strip()
@@ -117,6 +121,8 @@ class EditAccountForm(CreateOrEditFormBase):
     @staticmethod
     def validate_username(_, username):
         stripped_username = username.data.strip()
+
+        # Check if it already exists.
         if Account.query.filter(
             and_(
                 func.lower(Account.username) == func.lower(stripped_username),  # Has same username, and...
@@ -124,6 +130,10 @@ class EditAccountForm(CreateOrEditFormBase):
             )
         ).all():
             raise ValidationError("That username has already been taken.")
+
+        # Forbidden usernames.
+        if stripped_username.lower() in ["anon", "admin"]:
+            raise ValidationError("That username is not allowed.")
 
     @staticmethod
     def validate_email(_, email):

@@ -3,13 +3,14 @@ import os
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
-from flask import Flask
+from flask import Flask, request
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from application.config import Config
+from application.utils.get_ip import get_ip
 from logger import StreamLogFormatter, FileLogFormatter
 
 bcrypt = Bcrypt()
@@ -63,6 +64,14 @@ def create_app(config_class=Config):
     @app.context_processor
     def inject_environment():
         return dict(environment=os.environ.get("ENVIRONMENT"))
+
+    @app.before_request
+    def before_request():
+        if not request.path.startswith("/static"):
+            logger.info(
+                f"[{current_user.username if current_user.is_authenticated else 'anon'} - {get_ip(request)}] "
+                f"{request.method}: {request.path} "
+            )
 
     # return the app
     print("RUNNING APPLICATION")
