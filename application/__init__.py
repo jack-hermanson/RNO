@@ -3,13 +3,14 @@ import os
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
-from flask import Flask
+from flask import Flask, request
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from application.config import Config
+from application.utils.get_ip import get_ip
 from logger import StreamLogFormatter, FileLogFormatter
 
 bcrypt = Bcrypt()
@@ -39,11 +40,13 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # todo routes and blueprints
+    # routes and blueprints
     from application.modules.main.routes import main
     from application.modules.accounts.routes import accounts
+    from application.modules.admin.routes import admin
+    from .modules.errors.handlers import errors
 
-    for blueprint in [main, accounts]:
+    for blueprint in [main, accounts, admin, errors]:
         app.register_blueprint(blueprint)
 
     # login manager
@@ -60,13 +63,21 @@ def create_app(config_class=Config):
 
     @app.context_processor
     def inject_environment():
-        return dict(environment=os.environ.get("ENVIRONMENT"))
+        return dict(environment=os.environ.get("FLASK_ENV"))
+
+    @app.before_request
+    def before_request():
+        if not request.path.startswith("/static"):
+            logger.info(
+                f"[{current_user.username if current_user.is_authenticated else 'anon'} - {get_ip(request)}] "
+                f"{request.method}: {request.path} "
+            )
 
     # return the app
     print("RUNNING APPLICATION")
     logger.debug("LOGGING IS RUNNING")
-    logger.info(f"Running app in environment '{os.environ.get('ENVIRONMENT')}'")
-    logger.info(f"FLASK_ENV: '{os.environ.get('FLASK_ENV')}'")
+    flask_env = os.environ.get("FLASK_ENV")
+    logger.info(f"FLASK_ENV: '{flask_env}'")
     return app
 
 

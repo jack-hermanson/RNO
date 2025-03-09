@@ -16,6 +16,8 @@ def load_user(user_id):
 
 @accounts.route("/login", methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("accounts.me"))
     form = LoginForm()
     if form.validate_on_submit() and services.log_user_in(form):
         next_page = request.args.get("next")

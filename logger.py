@@ -1,4 +1,17 @@
 import logging
+import os
+
+
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+
+flask_env = os.environ.get("FLASK_ENV")
+werkzeug_log_level = logging.WARNING if flask_env == "production" else logging.INFO
+print(f"Setting werkzeug log level to {logging.getLevelName(werkzeug_log_level)} in {flask_env}")
+logging.getLogger("werkzeug").setLevel(werkzeug_log_level)
 
 
 class StreamLogFormatter(logging.Formatter):
