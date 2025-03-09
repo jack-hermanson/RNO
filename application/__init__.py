@@ -63,7 +63,7 @@ def create_app(config_class=Config):
 
     @app.context_processor
     def inject_environment():
-        return dict(environment=os.environ.get("ENVIRONMENT"))
+        return dict(environment=os.environ.get("FLASK_ENV"))
 
     @app.before_request
     def before_request():
@@ -76,8 +76,8 @@ def create_app(config_class=Config):
     # return the app
     print("RUNNING APPLICATION")
     logger.debug("LOGGING IS RUNNING")
-    logger.info(f"Running app in environment '{os.environ.get('ENVIRONMENT')}'")
-    logger.info(f"FLASK_ENV: '{os.environ.get('FLASK_ENV')}'")
+    flask_env = os.environ.get("FLASK_ENV")
+    logger.info(f"FLASK_ENV: '{flask_env}'")
     return app
 
 
