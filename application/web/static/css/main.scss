@@ -1,3 +1,4 @@
+
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -15,9 +16,10 @@ $container-max-widths: (
   xxl: 1560px
 );
 
+@import "typography";
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../node_modules/jack-hermanson-css-lib/src/main";
-@import "./callout";
+@import "callout";
 
 .main-container {
 
