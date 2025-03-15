@@ -1,23 +1,22 @@
-@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/functions";
+@import "colors";
 
+// Define callout variants
+$bd-callout-variants: primary, secondary, success, info, warning, danger !default;
 
-//
-// Callouts
-//
-$bd-callout-variants: info, warning, danger !default;
 .bd-callout {
-  --#{$prefix}link-color-rgb: var(--bd-callout-link);
-  --#{$prefix}code-color: var(--bd-callout-code-color);
+  --#{$prefix}link-color-rgb: var(--bs-link-color);
+  --#{$prefix}code-color: var(--bs-code-color);
 
   padding: 1.25rem;
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
   color: var(--bd-callout-color, inherit);
-  background-color: var(--bd-callout-bg, var(--bs-gray-100));
-  border-left: .25rem solid var(--bd-callout-border, var(--bs-gray-300));
+  background-color: var(--bd-callout-bg, var(--bs-light));
+  border-left: 0.25rem solid var(--bd-callout-border, var(--bs-gray-300));
 
   h4 {
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
   }
 
   > :last-child {
@@ -25,19 +24,21 @@ $bd-callout-variants: info, warning, danger !default;
   }
 
   + .bd-callout {
-    margin-top: -.25rem;
+    margin-top: -0.25rem;
   }
 
   .highlight {
-    background-color: rgba($black, .05);
+    background-color: rgba($black, 0.05);
   }
 }
 
-// Variations
+// Apply Bootstrap theme colors to callouts
 @each $variant in $bd-callout-variants {
   .bd-callout-#{$variant} {
-    --bd-callout-color: var(--bs-#{$variant}-text-emphasis);
-    --bd-callout-bg: var(--bs-#{$variant}-bg-subtle);
-    --bd-callout-border: var(--bs-#{$variant}-border-subtle);
+    // Light mode
+    background-color: var(--bs-#{$variant}-bg-subtle);
+    border-left-color: var(--bs-#{$variant}-border-subtle);
   }
 }
+
+

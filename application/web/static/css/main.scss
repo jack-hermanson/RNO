@@ -16,10 +16,16 @@ $container-max-widths: (
   xxl: 1560px
 );
 
+// Import custom colors first
+@import "colors";
 @import "typography";
+
+// Import Bootstrap's SCSS files after custom colors
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/bootstrap";
-@import "../node_modules/jack-hermanson-css-lib/src/main";
 @import "callout";
+@import "env_label";
 
 .main-container {
 

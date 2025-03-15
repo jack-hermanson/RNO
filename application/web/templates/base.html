@@ -29,7 +29,7 @@
     <script src="{{ url_for("static", filename="scripts/dark-mode.js") }}"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+<nav class="navbar navbar-expand-lg border-bottom bg-primary navbar-dark mb-4">
     <div class="container">
         <a href="{{ url_for('main.index') }}" class="navbar-brand d-flex">
             {#        todo logo #}
@@ -40,8 +40,9 @@
                     RNO Manager
 {#                    todo custom name #}
                 </span>
-                {% if environment != "production" %}<span class="d-flex my-auto pt-1"
-                                                          style="font-family: monospace; color: #fff; text-shadow: #222 0px 0px 5px, #ffaaff 0px 0px 10px, #ffaaff 0px 0px 15px; margin-left: 5px; font-size: 12px;">{{ ' {' }}{{ environment }}{{ '}' }}</span>{% endif %}
+                {% if environment != "production" %}
+                    <span class="env-label d-flex my-auto pt-1">{{ ' {' }}{{ environment }}{{ '}' }}</span>
+                {% endif %}
             </span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
@@ -55,10 +56,10 @@
                        class="nav-link {% if active_route == 'main' %}active{% endif %}">Home</a>
                 </li>
                 {% if current_user.is_authenticated and current_user.clearance >= 2 %}
-                <li class="nav-item">
-                    <a href="{{ url_for('admin.dashboard') }}"
-                       class="nav-link {% if active_route == 'admin' %}active{% endif %}">Admin</a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('admin.dashboard') }}"
+                           class="nav-link {% if active_route == 'admin' %}active{% endif %}">Admin</a>
+                    </li>
                 {% endif %}
 
                 {#                <li class="nav-item">#}
