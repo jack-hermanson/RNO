@@ -63,7 +63,7 @@ def create_app(config_class=Config):
 
     @app.context_processor
     def inject_environment():
-        return dict(environment=os.environ.get("ENVIRONMENT"))
+        return dict(environment=os.environ.get("ENVIRONMENT"), rno_name=os.environ.get("RNO_NAME"))
 
     @app.before_request
     def before_request():

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>RNO Manager | {{ title }}</title>
+    <title>{{ rno_name }} | {{ title }}</title>
     <meta name="og:title" content="RNO Manager | {{ title }}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
@@ -37,8 +37,7 @@
             {#                 class="d-inline-block align-text-top logo me-2">#}
             <span class="d-inline-flex align-items-center my-auto pt-1">
                 <span>
-                    RNO Manager
-{#                    todo custom name #}
+                    {{ rno_name }}
                 </span>
                 {% if environment != "production" %}
                     <span class="env-label d-flex my-auto pt-1">{{ ' {' }}{{ environment }}{{ '}' }}</span>
@@ -150,7 +149,7 @@
 <script src="{{ url_for("static", filename="node_modules/bootstrap/dist/js/bootstrap.bundle.js") }}"></script>
 
 {% block scripts %}{% endblock scripts %}
-<footer class="bg-dark-subtle py-3">
+<footer class="bg-secondary-subtle py-3">
     <div class="container">
         <div class="btn-group">
 
