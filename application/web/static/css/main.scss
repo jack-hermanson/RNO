@@ -49,6 +49,13 @@ span.fake-link {
   }
 }
 
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+.navbar-toggler {
+  border: none;
+}
+
 //.card {
 //  background-color: $dark;
 //}

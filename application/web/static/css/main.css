@@ -11951,6 +11951,14 @@ span.fake-link:hover, span.fake-link:active {
   text-decoration-style: solid;
 }
 
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
 .form-group {
   margin-bottom: 1em;
 }
