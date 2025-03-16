@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <title>{{ rno_name }} | {{ title }}</title>
-    <meta name="og:title" content="RNO Manager | {{ title }}">
+    <meta name="og:title" content="{{ rno_name }} | {{ title }}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/jack-hermanson-css-lib/css/main.css') }}">
@@ -13,7 +13,7 @@
 
     <meta name="og:url" content="{{ request.url }}">
     {# todo og:image #}
-    {#    <meta name="og:image" content="{{ url_for('static', filename='', _external=True) }}">#}
+{#        <meta name="og:image" content="{{ url_for('static', filename='', _external=True) }}">#}
     {# todo - og:description #}
     {#    <meta name="og:description"#}
     {#          content="This simple application is used to help us keep track of shifts at the Morey Chicken Cooperative">#}
