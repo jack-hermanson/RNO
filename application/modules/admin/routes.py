@@ -1,6 +1,6 @@
 from functools import wraps
 
-from flask import Blueprint, abort, render_template
+from flask import Blueprint, abort, render_template, flash
 from flask_login import login_required, current_user
 
 from application import logger
@@ -15,4 +15,5 @@ admin = Blueprint("admin", __name__, url_prefix="/admin")
 @requires_clearance(ClearanceEnum.ADMIN)
 def dashboard():
     logger.debug("Admin dashboard")
+    # flash("Admin dashboard", "success")
     return render_template("admin/dashboard.html")

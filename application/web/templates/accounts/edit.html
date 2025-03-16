@@ -5,13 +5,12 @@
 {% set active_route = "accounts" %}
 
 
+{% block subtitle %}
+    Edit your account information on this page. You can leave the password fields blank if you
+    do not want to reset your password.
+{% endblock subtitle %}
+
 {% block body %}
-    <div class="row">
-        <div class="col">
-            <p class="lead">Edit your account information on this page. You can leave the password fields blank if you
-                do not want to reset your password. </p>
-        </div>
-    </div>
     <div class="row">
         <div class="col">
             <form action="{{ url_for('accounts.edit') }}" method="POST">
@@ -31,11 +30,11 @@
                 </fieldset>
                 <fieldset>
                     <legend>Password</legend>
-                    <div class="bd-callout bd-callout-info">
+                    <div class="bd-callout bd-callout-success">
                         <p class="mb-0">If you don't want to change your password, then just leave the password fields
                             blank.</p>
                     </div>
-               
+
                     {{ form_group(form, name="password") }}
                     {{ form_group(form, name="confirm_password") }}
                 </fieldset>

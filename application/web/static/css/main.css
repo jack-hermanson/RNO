@@ -11928,6 +11928,10 @@ textarea.form-control-lg {
   text-shadow: #222 0px 0px 5px, #ffaaff 0px 0px 10px, #ffaaff 0px 0px 15px;
 }
 
+.sidebar, .mobile-nav {
+  background: #1a1d20 !important;
+}
+
 span.fake-link {
   text-decoration: underline;
   text-decoration-style: dashed;
@@ -11946,10 +11950,9 @@ span.fake-link:hover, span.fake-link:active {
 .page-title {
   display: flex;
   width: 100%;
+  padding-bottom: 0.25rem;
 }
 .page-title h2, .page-title .h2 {
-  margin-bottom: 0;
-  margin-top: 0.5em;
   display: block;
 }
 .page-title .actions {

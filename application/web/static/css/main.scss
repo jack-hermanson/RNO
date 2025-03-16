@@ -27,10 +27,10 @@ $container-max-widths: (
 @import "callout";
 @import "env_label";
 
-.main-container {
 
+.sidebar, .mobile-nav {
+  background: $dark-bg-subtle-dark !important;
 }
-
 
 span.fake-link {
   text-decoration: underline;
@@ -54,14 +54,13 @@ span.fake-link {
 .page-title {
   display: flex;
   width: 100%;
+  padding-bottom: 0.25rem;
 
   &:not(.no-border-bottom) {
     @extend .border-bottom;
   }
 
   h2 {
-    margin-bottom: 0;
-    margin-top: 0.5em;
     display: block;
   }
 

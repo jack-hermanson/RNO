@@ -10,6 +10,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from application.config import Config
+from application.modules.accounts.ClearanceEnum import ClearanceEnum
 from application.utils.get_ip import get_ip
 from logger import StreamLogFormatter, FileLogFormatter
 
@@ -63,7 +64,9 @@ def create_app(config_class=Config):
 
     @app.context_processor
     def inject_environment():
-        return dict(environment=os.environ.get("ENVIRONMENT"), rno_name=os.environ.get("RNO_NAME"))
+        return dict(
+            environment=os.environ.get("ENVIRONMENT"), rno_name=os.environ.get("RNO_NAME"), ClearanceEnum=ClearanceEnum
+        )
 
     @app.before_request
     def before_request():

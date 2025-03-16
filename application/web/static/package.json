@@ -5,6 +5,7 @@
     "@popperjs/core": "^2.11.8",
     "alpinejs": "^3.14.3",
     "bootstrap": "^5.3.3",
+    "fontawesome-free": "^1.0.4",
     "htmx.org": "^1.9.12",
     "jack-hermanson-css-lib": "^1.3.0"
   },
