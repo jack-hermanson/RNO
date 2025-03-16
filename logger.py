@@ -8,10 +8,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-flask_env = os.environ.get("FLASK_ENV")
-werkzeug_log_level = logging.WARNING if flask_env == "production" else logging.INFO
-print(f"Setting werkzeug log level to {logging.getLevelName(werkzeug_log_level)} in {flask_env}")
+class StaticURLFilter(logging.Filter):
+    def filter(self, record):
+        return not record.getMessage().__contains__("GET /static")
+
+
+environment = os.environ.get("ENVIRONMENT")
+werkzeug_log_level = logging.WARNING if environment == "production" else logging.INFO
+print(f"Setting werkzeug log level to {logging.getLevelName(werkzeug_log_level)} in {environment}")
 logging.getLogger("werkzeug").setLevel(werkzeug_log_level)
+logging.getLogger("werkzeug").addFilter(StaticURLFilter())
 
 
 class StreamLogFormatter(logging.Formatter):
@@ -42,7 +48,7 @@ class StreamLogFormatter(logging.Formatter):
 
 class FileLogFormatter(logging.Formatter):
     # format_string = f"%(levelname)-8s [%(asctime)s]: %(message)s  %(fxilename)s:%(lineno)d %(name)s"
-    format_string = f"%(levelname)-8s [%(asctime)s]: %(message)s - %(filename)s:%(lineno)d "
+    format_string = "%(levelname)-8s [%(asctime)s]: %(message)s - %(filename)s:%(lineno)d "
 
     FORMATS = {
         logging.DEBUG: format_string,

@@ -63,7 +63,7 @@ def create_app(config_class=Config):
 
     @app.context_processor
     def inject_environment():
-        return dict(environment=os.environ.get("FLASK_ENV"))
+        return dict(environment=os.environ.get("ENVIRONMENT"))
 
     @app.before_request
     def before_request():
@@ -76,8 +76,8 @@ def create_app(config_class=Config):
     # return the app
     print("RUNNING APPLICATION")
     logger.debug("LOGGING IS RUNNING")
-    flask_env = os.environ.get("FLASK_ENV")
-    logger.info(f"FLASK_ENV: '{flask_env}'")
+    flask_debug = bool(os.environ.get("FLASK_DEBUG"))
+    logger.info(f"FLASK_DEBUG: '{flask_debug}'")
     return app
 
 
@@ -99,8 +99,6 @@ fh.namer = lambda name: name.replace(".txt", "") + ".txt"
 
 logger.addHandler(fh)
 logger.addHandler(sh)
-logger.setLevel(
-    logging.DEBUG
-    if (os.environ.get("FLASK_ENV") == "dev" or os.environ.get("FLASK_ENV") == "development")
-    else logging.INFO
-)
+log_level = logging.getLevelNamesMapping().get(os.environ.get("LOG_LEVEL"))
+print(f"Setting application log level to {logging.getLevelName(log_level)} in {os.environ.get('ENVIRONMENT')}")
+logger.setLevel(log_level)

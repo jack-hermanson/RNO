@@ -6,7 +6,7 @@ load_dotenv()
 
 
 class Config:
-    TEMPLATES_AUTO_RELOAD = True
+    TEMPLATES_AUTO_RELOAD = os.getenv("TEMPLATES_AUTO_RELOAD")
     SECRET_KEY = os.getenv("SECRET_KEY")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     if os.environ.get("DATABASE_URL"):

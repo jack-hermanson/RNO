@@ -1,5 +1,7 @@
+$main-color: #2459b5;
+
 // Custom color definitions
-$primary: #393e7c;  // Muted Navy Blue
+$primary: $main-color;  // Muted Navy Blue
 $secondary: #6c757d;  // Muted Gray
 $success: #2d6a4f;  // Deep Green
 $info: #4c6788;  // Muted Blue
@@ -9,7 +11,7 @@ $light: #e9ecef;  // Soft Gray
 $dark: #212529;  // Deep Charcoal
 
 // Dark mode color definitions
-$primary-dark: #393e7c;
+$primary-dark: $main-color;
 $secondary-dark: #868e96;
 $success-dark: #40916c;
 $info-dark: #5c7c99;
