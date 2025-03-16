@@ -79,7 +79,7 @@ def create_app(config_class=Config):
     # return the app
     print("RUNNING APPLICATION")
     logger.debug("LOGGING IS RUNNING")
-    flask_debug = bool(os.environ.get("FLASK_DEBUG"))
+    flask_debug = bool(int(os.environ.get("FLASK_DEBUG")))
     logger.info(f"FLASK_DEBUG: '{flask_debug}'")
     return app
 
