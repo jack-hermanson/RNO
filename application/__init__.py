@@ -102,6 +102,6 @@ fh.namer = lambda name: name.replace(".txt", "") + ".txt"
 
 logger.addHandler(fh)
 logger.addHandler(sh)
-log_level = logging.getLevelNamesMapping().get(os.environ.get("LOG_LEVEL"))
+log_level = getattr(logging, os.environ.get("LOG_LEVEL", "INFO"))
 print(f"Setting application log level to {logging.getLevelName(log_level)} in {os.environ.get('ENVIRONMENT')}")
 logger.setLevel(log_level)
