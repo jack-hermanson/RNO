@@ -13,11 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <meta name="og:url" content="{{ request.url }}">
-    {# todo og:image #}
-    {#        <meta name="og:image" content="{{ url_for('static', filename='', _external=True) }}">#}
-    {# todo - og:description #}
-    {#    <meta name="og:description"#}
-    {#          content="This simple application is used to help us keep track of shifts at the Morey Chicken Cooperative">#}
+    <meta name="og:image" content="{{ url_for('static', filename='images/balcony.JPG', _external=True) }}">
+    <meta name="og:description"
+          content="This is the management application for the {{ rno_name }} RNO, currently under construction.">
     <script src="{{ url_for("static", filename="node_modules/htmx.org/dist/htmx.min.js") }}"></script>
     <script>
         (function () {
@@ -36,7 +34,7 @@
     <div class="row d-flex flex-grow-1 gx-0">
         <div
             id="nav"
-            class="offcanvas-lg offcanvas-start col-lg-2 h-100 flex-grow-1 px-lg-2 sidebar"
+            class="offcanvas-lg offcanvas-start col-lg-2 h-100 flex-grow-1 px-lg-2 sidebar border-end"
         >
             <nav class="navbar">
                 <div class="container-fluid">
@@ -127,13 +125,27 @@
                             </div>
                         </div>
                     </a>
+
                 </nav>
+            </div>
+            <div class="mt-auto pb-3 d-flex d-lg-none">
+                <button data-bs-toggle="offcanvas" data-bs-target="#nav"
+                   class="btn btn-outline-secondary mx-auto">
+                    <span class="row">
+                        <span class="col col-1">
+                            <i class="fa fa-times"></i>
+                        </span>
+                        <span class="col">
+                            Close
+                        </span>
+                    </span>
+                </button>
             </div>
         </div>
         <div class="col-12 col-lg-10 px-lg-2 mb-3">
             {# MOBILE ONLY #}
             <div class="d-lg-none">
-                <nav data-bs-theme="dark" class="navbar mobile-nav">
+                <nav class="navbar mobile-nav">
                     <div class="container-fluid">
                         <a href="{{ url_for('main.index') }}" class="navbar-brand d-flex">
 
@@ -222,7 +234,7 @@
 <script src="{{ url_for("static", filename="node_modules/bootstrap/dist/js/bootstrap.bundle.js") }}"></script>
 
 {% block scripts %}{% endblock scripts %}
-<footer class="bg-secondary-subtle py-3">
+<footer class="border-top py-3">
     <div class="container-fluid">
         <div class="btn-group">
 

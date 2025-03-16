@@ -27,12 +27,12 @@ $container-max-widths: (
 @import "env_label";
 
 
-.sidebar, .mobile-nav {
+.sidebar, .mobile-nav, footer {
   background: $light !important;
 }
 
 [data-bs-theme="dark"] {
-  .sidebar, .mobile-nav {
+  .sidebar, .mobile-nav, footer {
     background: $dark-bg-subtle-dark !important;
   }
 }
