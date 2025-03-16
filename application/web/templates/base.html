@@ -1,3 +1,5 @@
+{% from "macros/nav-link.html" import nav_link %}
+
 <!DOCTYPE html>
 <html lang="en" x-data="themeSwitcher()" :data-bs-theme="currentTheme">
 <head>
@@ -8,7 +10,7 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/jack-hermanson-css-lib/css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -65,67 +67,25 @@
             </nav>
             <div class="container-fluid pt-0">
                 <nav class="nav nav-pills flex-column">
-                    <a href="{{ url_for('main.index') }}"
-                       class="nav-link {% if active_route == 'main' %}active{% endif %}">
-                        <div class="row">
-                            <div class="col col-1">
-                                <i class="fa fa-home"></i>
-                            </div>
-                            <div class="col">
-                                Home
-                            </div>
-                        </div>
-                    </a>
+                    {{ nav_link(href=url_for('main.index'), active=(active_route == "main"), icon="fa-home", text="Home") }}
                     {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('accounts.me') }}"
-                           class="nav-link {% if active_route == 'accounts' %}active{% endif %}">
-                            <div class="row">
-                                <div class="col col-1">
-                                    <i class="fa fa-user"></i>
-                                </div>
-                                <div class="col">
-                                    {{ current_user.first_name|capitalize }}
-                                </div>
-                            </div>
-                        </a>
+                        {{ nav_link(href=url_for('accounts.me'), active=(active_route == "accounts"), icon="fa-user", text=(current_user.first_name|capitalize)) }}
                     {% else %}
-                        <a href="{{ url_for('accounts.login') }}"
-                           class="nav-link {% if active_route == 'accounts' %}active{% endif %}">
-                            <div class="row">
-                                <div class="col col-1">
-                                    <i class="fa fa-user"></i>
-                                </div>
-                                <div class="col">
-                                    Login
-                                </div>
-                            </div>
-                        </a>
+                        {{ nav_link(href=url_for('accounts.login'), active=(active_route == "accounts"), icon="fa-user", text="Login") }}
+                    {% endif %}
+                    {% if current_user.is_authenticated and current_user.clearance >= ClearanceEnum.NORMAL %}
+                        {{ nav_link(href="#", active=(active_route == "meetings"), icon="fa-people-roof", text="Meetings") }}
+                        {{ nav_link(href="#", active=(active_route == "contacts"), icon="fa-address-book", text="Contacts") }}
+                        {{ nav_link(href="#", active=(active_route == "board"), icon="fa-users-between-lines", text="Board Members") }}
+                        {{ nav_link(href="#", active=(active_route == "bylaws"), icon="fa-scale-balanced", text="Bylaws") }}
+                        {{ nav_link(href="#", active=(active_route == "inventory"), icon="fa-box-open", text="Inventory") }}
+                        {{ nav_link(href="#", active=(active_route == "finances"), icon="fa-file-invoice-dollar", text="Finances") }}
+                        {{ nav_link(href="#", active=(active_route == "members"), icon="fa-house-circle-check", text="Members") }}
                     {% endif %}
                     {% if current_user.is_authenticated and current_user.clearance >= ClearanceEnum.ADMIN %}
-                        <a href="{{ url_for('admin.dashboard') }}"
-                           class="nav-link {% if active_route == 'admin' %}active{% endif %}">
-                            <div class="row">
-                                <div class="col col-1">
-                                    <i class="fa fa-cog"></i>
-                                </div>
-                                <div class="col">
-                                    Admin
-                                </div>
-                            </div>
-                        </a>
+                        {{ nav_link(href=url_for('admin.dashboard'), active=(active_route == "admin"), icon="fa-cog", text="Admin") }}
                     {% endif %}
-                    <a href="#"
-                       class="nav-link {% if active_route == 'help' %}active{% endif %}">
-                        <div class="row">
-                            <div class="col col-1">
-                                <i class="fa fa-question"></i>
-                            </div>
-                            <div class="col">
-                                Help
-                            </div>
-                        </div>
-                    </a>
-
+                    {{ nav_link(href="#", active=(active_route == "help"), icon="fa-question", text="Help") }}
                 </nav>
             </div>
             <div class="mt-auto pb-3 d-flex d-lg-none">

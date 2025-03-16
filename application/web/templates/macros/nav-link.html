@@ -1,0 +1,14 @@
+{% macro nav_link(href, active, icon, text) %}
+    <a href="{{ href }}"
+       class="nav-link {% if active %}active{% endif %}">
+        <div class="row">
+            <div class="col-2 text-center">
+                <i class="fa-solid {{ icon }}"></i>
+            </div>
+            <div class="col ps-0">
+                {{ text }}
+            </div>
+        </div>
+    </a>
+    {{ active_route }}
+{% endmacro %}
