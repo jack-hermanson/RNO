@@ -1,19 +1,18 @@
-
 $grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 1380px,
-  xl: 1400px,
-  xxl: 1600px
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 1380px,
+        xl: 1400px,
+        xxl: 1600px
 );
 
 $container-max-widths: (
-  sm: 540px,
-  md: 1000px,
-  lg: 1320px,
-  xl: 1390px,
-  xxl: 1560px
+        sm: 540px,
+        md: 1000px,
+        lg: 1320px,
+        xl: 1390px,
+        xxl: 1560px
 );
 
 // Import custom colors first
@@ -29,7 +28,13 @@ $container-max-widths: (
 
 
 .sidebar, .mobile-nav {
-  background: $dark-bg-subtle-dark !important;
+  background: $light !important;
+}
+
+[data-bs-theme="dark"] {
+  .sidebar, .mobile-nav {
+    background: $dark-bg-subtle-dark !important;
+  }
 }
 
 span.fake-link {
@@ -38,6 +43,7 @@ span.fake-link {
   text-underline-offset: 4px;
   cursor: pointer;
   user-select: none;
+
   &:hover, &:active {
     text-decoration-style: solid;
   }

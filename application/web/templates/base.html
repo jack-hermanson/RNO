@@ -38,9 +38,9 @@
             id="nav"
             class="offcanvas-lg offcanvas-start col-lg-2 h-100 flex-grow-1 px-lg-2 sidebar"
         >
-            <nav data-bs-theme="dark" class="navbar">
+            <nav class="navbar">
                 <div class="container-fluid">
-                    <a href="{{ url_for('main.index') }}" class="navbar-brand d-flex">
+                    <a href="{{ url_for('main.index') }}" class="navbar-brand d-flex mx-auto">
                         {#        todo logo #}
                         {#            <img alt="logo" src="{{ url_for("static", filename="logo-transparent.png") }}" height="42"#}
                         {#                 class="d-inline-block align-text-top logo me-2">#}
@@ -66,7 +66,7 @@
                 </div>
             </nav>
             <div class="container-fluid pt-0">
-                <nav class="nav nav-pills flex-column" data-bs-theme="dark">
+                <nav class="nav nav-pills flex-column">
                     <a href="{{ url_for('main.index') }}"
                        class="nav-link {% if active_route == 'main' %}active{% endif %}">
                         <div class="row">
