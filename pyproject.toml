@@ -17,3 +17,4 @@ dynamic = ["version"]
 version_scheme = "post-release"
 local_scheme = "node-and-date"
 write_to = "application/_version.py"
+
