@@ -1,5 +1,6 @@
 import logging
 import os
+import subprocess
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
@@ -68,7 +69,10 @@ def create_app(config_class=Config):
     @app.context_processor
     def inject_environment():
         return dict(
-            environment=os.environ.get("ENVIRONMENT"), rno_name=os.environ.get("RNO_NAME"), ClearanceEnum=ClearanceEnum
+            environment=os.environ.get("ENVIRONMENT"),
+            rno_name=os.environ.get("RNO_NAME"),
+            ClearanceEnum=ClearanceEnum,
+            commit=subprocess.check_output(["git", "describe", "--always"]).strip().decode("utf-8"),
         )
 
     @app.before_request

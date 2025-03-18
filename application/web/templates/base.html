@@ -10,7 +10,8 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/jack-hermanson-css-lib/css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -92,7 +93,7 @@
             </div>
             <div class="mt-auto pb-3 d-flex d-lg-none">
                 <button data-bs-toggle="offcanvas" data-bs-target="#nav"
-                   class="btn btn-outline-secondary mx-auto">
+                        class="btn btn-outline-secondary mx-auto">
                     <span class="row">
                         <span class="col col-1">
                             <i class="fa fa-times"></i>
@@ -198,24 +199,36 @@
 {% block scripts %}{% endblock scripts %}
 <footer class="border-top py-3">
     <div class="container-fluid">
-        <div class="btn-group">
+        <div class="row">
+            <div class="col">
+                <div>
+                    <h5>RNO Management Solution</h5>
+                    <h6 class="text-muted">Build <a href="https://github.com/jack-hermanson/RNO/commit/{{ commit }}">{{ commit }}</a> &bull; Copyleft &#127279; 2025, Lucid Software Development Cooperative, no rights reserved.</h6>
+                </div>
 
-            <button class="btn btn-sm btn-outline-primary"
-                    @click="setTheme('light')"
-                    :aria-pressed="currentTheme === 'light'"
-                    :class="{'active': currentTheme === 'light'}"
-                    data-bs-theme-value="light">
-                Light
-            </button>
+            </div>
+            <div class="col-auto text-end">
+                <div class="btn-group">
 
-            <button class="btn btn-sm btn-outline-primary"
-                    @click="setTheme('dark')"
-                    :aria-pressed="currentTheme === 'dark'"
-                    :class="{'active': currentTheme === 'dark'}"
-                    data-bs-theme-value="dark">
-                Dark
-            </button>
+                    <button class="btn btn-sm btn-outline-primary"
+                            @click="setTheme('light')"
+                            :aria-pressed="currentTheme === 'light'"
+                            :class="{'active': currentTheme === 'light'}"
+                            data-bs-theme-value="light">
+                        Light
+                    </button>
+
+                    <button class="btn btn-sm btn-outline-primary"
+                            @click="setTheme('dark')"
+                            :aria-pressed="currentTheme === 'dark'"
+                            :class="{'active': currentTheme === 'dark'}"
+                            data-bs-theme-value="dark">
+                        Dark
+                    </button>
+                </div>
+            </div>
         </div>
+
 
     </div>
 </footer>
