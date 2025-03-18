@@ -34,7 +34,9 @@ def create_app(config_class=Config):
     # bcrypt
     bcrypt.init_app(app)
 
-    # todo models
+    # models
+    import application.modules.accounts.models
+    import application.modules.admin.roles.models
 
     # database
     db.app = app
@@ -45,9 +47,10 @@ def create_app(config_class=Config):
     from application.modules.main.routes import main
     from application.modules.accounts.routes import accounts
     from application.modules.admin.routes import admin
+    from application.modules.admin.roles.routes import roles
     from .modules.errors.handlers import errors
 
-    for blueprint in [main, accounts, admin, errors]:
+    for blueprint in [main, accounts, admin, roles, errors]:
         app.register_blueprint(blueprint)
 
     # login manager
