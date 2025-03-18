@@ -25,6 +25,8 @@ platformdirs==4.3.6
 psycopg2==2.9.10
 psycopg2-binary==2.9.10
 python-dotenv==1.0.1
+setuptools==76.1.0
+setuptools-scm==8.2.0
 SQLAlchemy==2.0.37
 types-Flask-Migrate==4.0.0.20240311
 typing_extensions==4.12.2
