@@ -1,3 +1,5 @@
+Copyright (C) 2025 Lucid Software Development Cooperative
+
 GNU General Public License
 ==========================
 
