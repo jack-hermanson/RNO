@@ -94,14 +94,9 @@
             <div class="mt-auto pb-3 d-flex d-lg-none">
                 <button data-bs-toggle="offcanvas" data-bs-target="#nav"
                         class="btn btn-outline-secondary mx-auto">
-                    <span class="row">
-                        <span class="col col-1">
-                            <i class="fa fa-times"></i>
-                        </span>
-                        <span class="col">
+
+
                             Close
-                        </span>
-                    </span>
                 </button>
             </div>
         </div>
@@ -199,38 +194,33 @@
 {% block scripts %}{% endblock scripts %}
 <footer class="border-top py-3">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div>
-                    <h5>RNO Management Solution</h5>
-                    <h6 class="text-muted">Build <a target="_blank" href="https://github.com/jack-hermanson/RNO/commit/{{ commit }}">{{ commit }}</a> &bull; Copyleft &#127279; 2025, Lucid Software Development Cooperative, no rights reserved.</h6>
-                </div>
+        <div class="d-flex">
 
+            <div class="me-auto d-flex">
+                <h6 class="text-muted my-auto">Build <a target="_blank"
+                                                href="https://github.com/jack-hermanson/RNO/commit/{{ commit }}">{{ commit }}</a>
+                </h6>
             </div>
-            <div class="col-auto text-end">
-                <div class="btn-group">
 
-                    <button class="btn btn-sm btn-outline-primary"
-                            @click="setTheme('light')"
-                            :aria-pressed="currentTheme === 'light'"
-                            :class="{'active': currentTheme === 'light'}"
-                            data-bs-theme-value="light">
-                        Light
-                    </button>
+            <div class="btn-group">
 
-                    <button class="btn btn-sm btn-outline-primary"
-                            @click="setTheme('dark')"
-                            :aria-pressed="currentTheme === 'dark'"
-                            :class="{'active': currentTheme === 'dark'}"
-                            data-bs-theme-value="dark">
-                        Dark
-                    </button>
-                </div>
+                <button class="btn btn-sm btn-outline-primary"
+                        @click="setTheme('light')"
+                        :aria-pressed="currentTheme === 'light'"
+                        :class="{'active': currentTheme === 'light'}"
+                        data-bs-theme-value="light">
+                    Light
+                </button>
+
+                <button class="btn btn-sm btn-outline-primary"
+                        @click="setTheme('dark')"
+                        :aria-pressed="currentTheme === 'dark'"
+                        :class="{'active': currentTheme === 'dark'}"
+                        data-bs-theme-value="dark">
+                    Dark
+                </button>
             </div>
         </div>
-
-
-    </div>
 </footer>
 </body>
 <script src="{{ url_for('static', filename='node_modules/alpinejs/dist/cdn.js') }}"></script>
