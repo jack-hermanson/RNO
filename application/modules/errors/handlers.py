@@ -9,10 +9,18 @@ errors = Blueprint("errors", __name__)
 
 
 @errors.app_errorhandler(HTTPException)
-def handle_exception(e):
+def handle_http_exception(e):
     logger.debug("AN ERROR OCCURRED")
     logger.error(traceback.format_exc())
     status = e.get_response().status_code
+    return render_template("errors/generic-error.html", status=status, error=e.__str__()), status
+
+
+@errors.app_errorhandler(Exception)
+def handle_generic_exception(e):
+    logger.debug("AN ERROR OCCURRED")
+    logger.error(traceback.format_exc())
+    status = 500
     return render_template("errors/generic-error.html", status=status, error=e.__str__()), status
 
 
