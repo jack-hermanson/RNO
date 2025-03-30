@@ -13,3 +13,4 @@ class Config:
         SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL").replace("postgres://", "postgresql://")
     else:
         SQLALCHEMY_DATABASE_URI = "sqlite:///site.db"
+    SQLALCHEMY_ECHO = bool(int(os.getenv("SQLALCHEMY_ECHO")))
