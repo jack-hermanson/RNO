@@ -18,6 +18,7 @@ werkzeug_log_level = logging.WARNING  # if environment == "production" else logg
 print(f"Setting werkzeug log level to {logging.getLevelName(werkzeug_log_level)} in {environment}")
 logging.getLogger("werkzeug").setLevel(werkzeug_log_level)
 logging.getLogger("werkzeug").addFilter(StaticURLFilter())
+logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
 
 class StreamLogFormatter(logging.Formatter):
