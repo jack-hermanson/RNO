@@ -1,6 +1,6 @@
 import traceback
 
-from flask import Blueprint, render_template, request, make_response
+from flask import Blueprint, render_template, request, make_response, jsonify
 from werkzeug.exceptions import HTTPException
 
 from application import logger
@@ -14,6 +14,15 @@ def handle_exception(e):
     logger.error(traceback.format_exc())
     status = e.get_response().status_code
     return render_template("errors/generic-error.html", status=status, error=e.__str__()), status
+
+
+from werkzeug.exceptions import InternalServerError
+
+
+@errors.errorhandler(InternalServerError)
+def handle_internal_server_error(error):
+    original = getattr(error, "original_exception", None)
+    return jsonify({"error": "Internal server error", "details": str(original)}), 500
 
 
 # @errors.app_errorhandler(403)
