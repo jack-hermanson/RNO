@@ -1,0 +1,44 @@
+{% macro role_card(role) %}
+    <div class="card mb-3 no-mb-last">
+        <div class="card-body">
+            <div class="d-flex">
+                <h5 class="card-title">{{ role.name }}</h5>
+                {% if role.is_officer %}
+                    <span class="badge bg-info d-flex mb-2 mt-auto ms-2">Officer</span>
+                {% endif %}
+            </div>
+            {% if role.description %}
+                <p class="mb-0">{{ role.description }}</p>
+            {% else %}
+                <p class="text-muted mb-0"><i>No description.</i></p>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <nav>
+                <a class="me-1 pe-2 border-end" href="{{ url_for("roles.edit", role_id=role.role_id) }}">Edit</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#delete-role-{{ role.role_id }}">Delete</a>
+            </nav>
+        </div>
+    </div>
+
+    {# TODO - make a reusable modal macro #}
+    <div class="modal" tabindex="-1" id="delete-role-{{ role.role_id }}" aria-hidden="true">
+        <form class="modal-dialog" method="POST" action="{{ url_for("roles.delete", role_id=role.role_id) }}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="mb-0">Confirm Deletion</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">Are you sure you want to delete the <b>{{ role.name }}</b> role?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endmacro %}
+

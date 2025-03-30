@@ -1,14 +1,14 @@
 import time
 from datetime import datetime
 
-from flask import request, flash
+from flask import flash
 from flask_login import login_user, current_user
 from sqlalchemy import func
 
+from application import bcrypt, db, logger
 from .ClearanceEnum import ClearanceEnum
 from .forms import CreateAccountForm, LoginForm, EditAccountForm
 from .models import Account
-from application import bcrypt, db, logger
 
 
 def register(form: CreateAccountForm) -> Account:
@@ -68,3 +68,8 @@ def edit_my_account(form: EditAccountForm):
     db.session.commit()
     flash("Account updated successfully.", "success")
     return True  # Success
+
+
+def get_all_accounts() -> list[Account]:
+    accounts: list[Account] = Account.query.order_by(Account.first_name).all()
+    return accounts

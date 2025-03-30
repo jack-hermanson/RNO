@@ -1,0 +1,9 @@
+{% from "_macros/tabs.html" import tabs, tab %}
+
+{% macro admin_tabs(active_tab) %}
+    {% call tabs() %}
+        {{ tab(name="Dashboard",url=url_for("admin.dashboard"), is_active=(active_tab == "Dashboard")) }}
+        {{ tab(name="Users", url="#", is_active=(active_tab == "Users")) }}
+        {{ tab(name="Roles", url=url_for("roles.index"), is_active=(active_tab == "Roles")) }}
+    {% endcall %}
+{% endmacro %}

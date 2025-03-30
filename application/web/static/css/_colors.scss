@@ -1,4 +1,4 @@
-$main-color: #2459b5;
+$main-color: #629aa9;
 
 // Custom color definitions
 $primary: $main-color;  // Muted Navy Blue
@@ -11,6 +11,7 @@ $light: #e9ecef;  // Soft Gray
 $dark: #212529;  // Deep Charcoal
 
 // Dark mode color definitions
+// todo - this doesn't seem to do what I want, or anything at all
 $primary-dark: $main-color;
 $secondary-dark: #868e96;
 $success-dark: #40916c;

@@ -1,16 +1,29 @@
 {% extends "base.html" %}
-{% from "macros/form.html" import form_group %}
+{% from "_macros/form.html" import form_group %}
+{% from "_macros/breadcrumbs.html" import breadcrumbs %}
 
 {% set title = "Edit Account" %}
 {% set active_route = "accounts" %}
 
 
-{% block subtitle %}
-    Edit your account information on this page. You can leave the password fields blank if you
-    do not want to reset your password.
-{% endblock subtitle %}
+{% block breadcrumbs %}
+    {{ breadcrumbs(
+        crumbs=[
+            (url_for("accounts.me"), current_user.first_name),
+            (url_for("accounts.edit"), "Edit")
+        ]
+    )}}
+{% endblock breadcrumbs %}
 
 {% block body %}
+    <div class="row">
+        <div class="col">
+            <p class="lead">
+                Edit your account information on this page. You can leave the password fields blank if you
+                do not want to reset your password.
+            </p>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <form action="{{ url_for('accounts.edit') }}" method="POST">

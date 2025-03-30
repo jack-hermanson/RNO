@@ -12,6 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from application.config import Config
 from application.modules.accounts.ClearanceEnum import ClearanceEnum
+from application.utils.CrudEnum import CrudEnum
 from application.utils.get_ip import get_ip
 from logger import StreamLogFormatter, FileLogFormatter
 
@@ -72,13 +73,14 @@ def create_app(config_class=Config):
             environment=os.environ.get("ENVIRONMENT"),
             rno_name=os.environ.get("RNO_NAME"),
             ClearanceEnum=ClearanceEnum,
+            CrudEnum=CrudEnum,
             commit=subprocess.check_output(["git", "describe", "--always"]).strip().decode("utf-8"),
         )
 
     @app.before_request
     def before_request():
         if not request.path.startswith("/static"):
-            logger.info(
+            logger.debug(
                 f"[{current_user.username if current_user.is_authenticated else 'anon'} - {get_ip(request)}] "
                 f"{request.method}: {request.path} "
             )

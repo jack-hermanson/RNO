@@ -1,4 +1,4 @@
-{% from "macros/nav-link.html" import nav_link %}
+{% from "_macros/nav_link.html" import nav_link %}
 
 <!DOCTYPE html>
 <html lang="en" x-data="themeSwitcher()" :data-bs-theme="currentTheme">
@@ -95,9 +95,9 @@
                 <button data-bs-toggle="offcanvas" data-bs-target="#nav"
                         class="btn btn-outline-secondary mx-auto">
 
-                            <i class="fa fa-times me-1"></i>
+                    <i class="fa fa-times me-1"></i>
 
-                            Close
+                    Close
                 </button>
             </div>
         </div>
@@ -137,9 +137,8 @@
                 </nav>
             </div>
 
-            <div class="container-fluid pt-3">
-                {% block tabs %}
-                {% endblock tabs %}
+            <div class="container-fluid pt-3" id="main-container">
+
                 {% with messages = get_flashed_messages(with_categories=True) %}
                     {% if messages %}
                         <div class="mb-2">
@@ -155,11 +154,18 @@
                         </div>
                     {% endif %}
                 {% endwith %}
+
+                {% block tabs %}
+                {% endblock tabs %}
+
+                {% block breadcrumbs %}
+                {% endblock breadcrumbs %}
+
                 {% if not hide_title_row %}
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title {% if title_row_no_border %}no-border-bottom{% endif %}">
-                                <h2 class="my-0">
+                            <div class="page-title mb-3 {% if title_row_no_border %}no-border-bottom{% endif %}">
+                                <h2 class="mb-0">
                                     {% if title %}
                                         {{ text_title if text_title else title }}
                                     {% endif %}
@@ -172,15 +178,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <p class="lead mt-1">
-                                {% block subtitle %}{% endblock subtitle %}
-                            </p>
-                        </div>
-                    </div>
                 {% endif %}
+
                 {% block body %}{% endblock body %}
             </div>
         </div>
@@ -199,7 +198,7 @@
 
             <div class="me-auto d-flex">
                 <h6 class="text-muted my-auto">Build <a target="_blank"
-                                                href="https://github.com/jack-hermanson/RNO/commit/{{ commit }}">{{ commit }}</a>
+                                                        href="https://github.com/jack-hermanson/RNO/commit/{{ commit }}">{{ commit }}</a>
                 </h6>
             </div>
 

@@ -1,19 +1,16 @@
 {% extends "base.html" %}
 
-{% from "admin/_partials/admin-tabs-partial.html" import admin_tabs  %}
+{% from "admin/_macros/admin_tabs.html" import admin_tabs  %}
 
 
 {% set active_route = "admin" %}
 {% set title = "Admin Dashboard" %}
 {% set hide_title_row = False %}
+{% set title_row_no_border = True %}
 
 {% block tabs %}
     {{ admin_tabs(active_tab="Dashboard") }}
 {% endblock tabs %}
-
-{% block subtitle %}
-    This is the admin dashboard.
-{% endblock subtitle %}
 
 {% block body %}
 

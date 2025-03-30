@@ -14,7 +14,7 @@ class StaticURLFilter(logging.Filter):
 
 
 environment = os.environ.get("ENVIRONMENT")
-werkzeug_log_level = logging.WARNING if environment == "production" else logging.INFO
+werkzeug_log_level = logging.WARNING  # if environment == "production" else logging.INFO
 print(f"Setting werkzeug log level to {logging.getLevelName(werkzeug_log_level)} in {environment}")
 logging.getLogger("werkzeug").setLevel(werkzeug_log_level)
 logging.getLogger("werkzeug").addFilter(StaticURLFilter())

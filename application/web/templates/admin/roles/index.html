@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% set active_route = "admin" %}
+
+{% from "admin/_macros/admin_tabs.html" import admin_tabs %}
+{% from "admin/roles/_macros/role_card.html" import role_card %}
+{% from "_macros/action_dropdown.html" import action_dropdown, action_dropdown_item, action_dropdown_separator %}
+
+{% set title_row_no_border = False %}
+
+{% block tabs %}
+    {{ admin_tabs(active_tab="Roles") }}
+{% endblock tabs %}
+
+
+{% block actions %}
+    <a class="btn btn-success btn-sm" href="{{ url_for("roles.create") }}">
+        Create Role
+    </a>
+{% endblock %}
+
+{% block body %}
+    {% for role in roles_list %}
+        {{ role_card(role) }}
+    {% endfor %}
+{% endblock body %}

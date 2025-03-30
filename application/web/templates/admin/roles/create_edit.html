@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% from "_macros/form.html" import form_group %}
+{% from "admin/_macros/admin_tabs.html" import admin_tabs  %}
+{% from "_macros/breadcrumbs.html" import breadcrumbs %}
+{% set title_row_no_border = False %}
+
+
+{% set active_route = "admin" %}
+
+{% block tabs %}
+    {{ admin_tabs(active_tab="Roles") }}
+{% endblock tabs %}
+
+{% block breadcrumbs %}
+    {{ breadcrumbs(
+        crumbs=[
+            (url_for("admin.dashboard"), "Admin"),
+            (url_for("roles.index"), "Roles"),
+            (url_for(request.endpoint, **request.view_args), "Create" if mode == CrudEnum.CREATE else "Edit")
+        ]
+    )}}
+{% endblock breadcrumbs %}
+
+
+
+{% block body %}
+    <form action="{% if mode == CrudEnum.EDIT %}{% else %}{% endif %}" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.role_id() }}
+        <div class="row">
+            <div class="col col-12 col-lg-6">
+                {{ form_group(form, name="name", required=True) }}
+
+                {{ form_group(form, name="description") }}
+
+                {{ form_group(form, name="is_officer") }}
+
+            </div>
+        </div>
+        <div class="bottom-buttons">
+            {{ form.submit(class="btn btn-success") }}
+            <a href="{{ url_for(request.endpoint, **request.view_args) }}" class="btn btn-secondary">Reset</a>
+        </div>
+    </form>
+{% endblock body %}
