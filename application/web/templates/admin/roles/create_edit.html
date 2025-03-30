@@ -27,7 +27,6 @@
 {% block body %}
     <form action="{% if mode == CrudEnum.EDIT %}{% else %}{% endif %}" method="POST">
         {{ form.hidden_tag() }}
-        {{ form.role_id() }}
         <div class="row">
             <div class="col col-12 col-lg-6">
                 {{ form_group(form, name="name", required=True) }}
