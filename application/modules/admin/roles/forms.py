@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
-from sqlalchemy import func, and_
-from wtforms.fields import StringField, SubmitField, HiddenField
+from sqlalchemy import func, and_, or_
+from wtforms.fields import StringField, SubmitField, HiddenField, IntegerField
 from wtforms.fields.choices import SelectField
 from wtforms.fields.simple import BooleanField
 from wtforms.validators import DataRequired, Length, Optional, ValidationError
+from wtforms.widgets.core import HiddenInput
 
 from application import logger
 from application.modules.accounts.models import Account
@@ -11,7 +12,7 @@ from application.modules.admin.roles.models import Role
 
 
 class CreateEditRoleForm(FlaskForm):
-    role_id = HiddenField(validators=[Optional()])
+    role_id = IntegerField(validators=[Optional()], widget=HiddenInput())
 
     name = StringField(
         "Name",
@@ -34,12 +35,8 @@ class CreateEditRoleForm(FlaskForm):
 
     @staticmethod
     def validate_name(form, name):
-        stripped_name = name.data.strip()
-        if Role.query.filter(
-            and_(
-                func.lower(Role.name) == func.lower(stripped_name),
-                form.role_id.data != "",
-                Role.role_id != form.role_id.data,
-            )
-        ).all():
+
+        # stripped_name = name.data.strip()
+        existing_role = Role.query.filter(func.lower(Role.name) == func.lower(func.trim(name.data))).first()
+        if existing_role and form.role_id.data != existing_role.role_id:
             raise ValidationError("That role has already been created.")

@@ -28,8 +28,6 @@ def create():
         role = create_new_role(form)
         flash(f"Role {role.name} created successfully.", "success")
         return redirect(url_for("roles.index"))
-    else:
-        logger.debug(f"Not validate on submit {form.errors}")
 
     return render_template("admin/roles/create_edit.html", form=form, mode=CrudEnum.CREATE, title="Create Role")
 
