@@ -38,6 +38,7 @@ class CreateEditRoleForm(FlaskForm):
         if Role.query.filter(
             and_(
                 func.lower(Role.name) == func.lower(stripped_name),
+                form.role_id.data != "",
                 Role.role_id != form.role_id.data,
             )
         ).all():
