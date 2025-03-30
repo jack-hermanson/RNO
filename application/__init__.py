@@ -80,6 +80,7 @@ def create_app(config_class=Config):
     @app.before_request
     def before_request():
         if not request.path.startswith("/static"):
+            raise ValueError("hi")
             logger.debug(
                 f"[{current_user.username if current_user.is_authenticated else 'anon'} - {get_ip(request)}] "
                 f"{request.method}: {request.path} "
@@ -117,7 +118,9 @@ print(f"Setting application log level to {logging.getLevelName(log_level)} in {o
 logger.setLevel(log_level)
 
 # SQL Alchemy
-logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
+logging.getLogger("sqlalchemy.engine").setLevel(
+    logging.INFO if bool(int(os.environ.get("SQLALCHEMY_ECHO", 0))) else logging.WARNING
+)
 logging.getLogger("sqlalchemy.engine").addHandler(fh)
 logging.getLogger("sqlalchemy.engine").addHandler(fh)
 logging.getLogger("sqlalchemy.engine").propagate = False
