@@ -38,6 +38,11 @@ def create():
     return render_template("admin/roles/create_edit.html", form=form, mode=CrudEnum.CREATE, title="Create Role")
 
 
+@roles.route("/fake")
+def fake():
+    raise ValueError("Fake Exception")
+
+
 @roles.route("/delete/<int:role_id>", methods=["POST"])
 @login_required
 @requires_clearance(ClearanceEnum.ADMIN)
