@@ -9,6 +9,7 @@ errors = Blueprint("errors", __name__)
 
 
 @errors.app_errorhandler(HTTPException)
+@errors.app_errorhandler(Exception)
 def handle_exception(e):
     logger.error(traceback.format_exc())
     status = e.get_response().status_code
