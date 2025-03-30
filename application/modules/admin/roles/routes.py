@@ -1,7 +1,7 @@
 from flask import Blueprint, flash, redirect, url_for, request, render_template
 from flask_login import login_required
 
-from application import ClearanceEnum
+from application import ClearanceEnum, logger
 from application.modules.accounts.requires_clearance import requires_clearance
 from application.utils.CrudEnum import CrudEnum
 from .forms import CreateEditRoleForm
@@ -22,10 +22,15 @@ def index():
 @login_required
 @requires_clearance(ClearanceEnum.ADMIN)
 def create():
+    logger.debug("Creating new role in route")
     form = CreateEditRoleForm()
+    logger.debug("Form")
     if form.validate_on_submit():
+        logger.debug("Submitted")
         role = create_new_role(form)
+        logger.debug("Role created")
         flash(f"Role {role.name} created successfully.", "success")
+        logger.debug("Flash done")
         return redirect(url_for("roles.index"))
 
     return render_template("admin/roles/create_edit.html", form=form, mode=CrudEnum.CREATE, title="Create Role")
