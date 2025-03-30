@@ -1,24 +1,9 @@
 import logging
-import os
-
-
-from dotenv import load_dotenv
-
-
-load_dotenv()
 
 
 class StaticURLFilter(logging.Filter):
     def filter(self, record):
         return not record.getMessage().__contains__("GET /static")
-
-
-environment = os.environ.get("ENVIRONMENT")
-werkzeug_log_level = logging.WARNING  # if environment == "production" else logging.INFO
-print(f"Setting werkzeug log level to {logging.getLevelName(werkzeug_log_level)} in {environment}")
-logging.getLogger("werkzeug").setLevel(werkzeug_log_level)
-logging.getLogger("werkzeug").addFilter(StaticURLFilter())
-logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
 
 class StreamLogFormatter(logging.Formatter):

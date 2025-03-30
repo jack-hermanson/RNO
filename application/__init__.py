@@ -14,7 +14,7 @@ from application.config import Config
 from application.modules.accounts.ClearanceEnum import ClearanceEnum
 from application.utils.CrudEnum import CrudEnum
 from application.utils.get_ip import get_ip
-from logger import StreamLogFormatter, FileLogFormatter
+from logger import StreamLogFormatter, FileLogFormatter, StaticURLFilter
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
@@ -94,6 +94,7 @@ def create_app(config_class=Config):
 
 
 # Set up logging
+environment = os.environ.get("ENVIRONMENT")
 logging.basicConfig()
 logger = logging.getLogger("RNO")
 logger.propagate = False
@@ -114,3 +115,18 @@ logger.addHandler(sh)
 log_level = getattr(logging, os.environ.get("LOG_LEVEL", "INFO"))
 print(f"Setting application log level to {logging.getLevelName(log_level)} in {os.environ.get('ENVIRONMENT')}")
 logger.setLevel(log_level)
+
+# SQL Alchemy
+logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
+logging.getLogger("sqlalchemy.engine").addHandler(fh)
+logging.getLogger("sqlalchemy.engine").addHandler(fh)
+logging.getLogger("sqlalchemy.engine").propagate = False
+
+# Werkzeug
+werkzeug_log_level = logging.WARNING  # if environment == "production" else logging.INFO
+print(f"Setting werkzeug log level to {logging.getLevelName(werkzeug_log_level)} in {environment}")
+logging.getLogger("werkzeug").setLevel(werkzeug_log_level)
+logging.getLogger("werkzeug").addFilter(StaticURLFilter())
+logging.getLogger("werkzeug").addHandler(fh)
+logging.getLogger("werkzeug").addHandler(sh)
+logging.getLogger("werkzeug").propagate = False
