@@ -24,13 +24,9 @@ def index():
 def create():
     logger.debug("Creating new role in route")
     form = CreateEditRoleForm()
-    logger.debug("Form")
     if form.validate_on_submit():
-        logger.debug("Submitted")
         role = create_new_role(form)
-        logger.debug("Role created")
         flash(f"Role {role.name} created successfully.", "success")
-        logger.debug("Flash done")
         return redirect(url_for("roles.index"))
     else:
         logger.debug(f"Not validate on submit {form.errors}")
