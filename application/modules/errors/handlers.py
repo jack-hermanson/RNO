@@ -10,11 +10,11 @@ errors = Blueprint("errors", __name__)
 
 @errors.app_errorhandler(Exception)
 def handle_http_exception(e):
-    if current_app.debug:  # If debugging, re-raise the error to let Flask handle it
-        raise e
-
     logger.debug("AN ERROR OCCURRED")
     logger.error(traceback.format_exc())
+
+    if current_app.debug:  # If debugging, re-raise the error to let Flask handle it
+        raise e
 
     status = 500
     if isinstance(e, HTTPException):
