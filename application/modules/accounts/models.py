@@ -2,6 +2,7 @@ from application import db
 from flask_login import UserMixin
 
 from application.modules.accounts.ClearanceEnum import ClearanceEnum
+from application.modules.admin.roles.models import role_account
 
 
 class Account(db.Model, UserMixin):
@@ -18,4 +19,4 @@ class Account(db.Model, UserMixin):
     last_login = db.Column(db.DateTime, nullable=True)
 
     # Which roles does this account have?
-    # roles = db.relationship("Role", secondary=lambda: role_account)
+    roles = db.relationship("Role", secondary=role_account, back_populates="accounts")

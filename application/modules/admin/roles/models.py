@@ -2,12 +2,11 @@ from application import db
 
 
 # Many-to-many relationship
-# role_account = db.Table(
-#     "role_account",
-#     db.Column("role_id", db.Integer, db.ForeignKey("role.role_id"), nullable=False, primary_key=True),
-#     db.Column("account_id", db.Integer, db.ForeignKey("account.account_id"), nullable=False, primary_key=True),
-# )
-# todo - research other syntax/methods or stick with this if it's simpler
+role_account = db.Table(
+    "role_account",
+    db.Column("role_id", db.Integer, db.ForeignKey("role.role_id"), nullable=False, primary_key=True),
+    db.Column("account_id", db.Integer, db.ForeignKey("account.account_id"), nullable=False, primary_key=True),
+)
 
 
 class Role(db.Model):
@@ -24,4 +23,4 @@ class Role(db.Model):
     is_officer = db.Column(db.Boolean, nullable=False)
 
     # Which accounts have this role?
-    # accounts = db.relationship("Account", secondary=role_account, back_populates="roles")
+    accounts = db.relationship("Account", secondary=role_account, back_populates="roles")
