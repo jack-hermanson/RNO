@@ -25,7 +25,7 @@
 
 
 {% block body %}
-    <form action="{% if mode == CrudEnum.EDIT %}{% else %}{% endif %}" method="POST">
+    <form action="{{ url_for(request.endpoint, **request.view_args) }}" method="POST">
         {{ form.hidden_tag() }}
         <div class="row">
             <div class="col col-12 col-lg-6">
